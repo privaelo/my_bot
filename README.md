@@ -3,7 +3,7 @@
 A small ROS 2 autonomous mobile robot project following the
 [Articulated Robotics - Build a Mobile Robot with ROS](https://articulatedrobotics.xyz/category/build-a-mobile-robot-with-ros/) tutorial series.
 
-## Current State
+<!--## Current State
 
 This package currently contains a basic differential-drive robot description:
 
@@ -13,6 +13,7 @@ This package currently contains a basic differential-drive robot description:
 - simple visual, collision, and inertial properties using Xacro macros
 - a `robot_state_publisher` launch file
 - starter RViz, config, and empty Gazebo world files
+-->
 
 ## Package Layout
 
@@ -43,4 +44,9 @@ To use simulated time:
 
 ```bash
 ros2 launch my_bot rsp.launch.py use_sim_time:=true
+```
+
+To visualize wheels, you need to simulate with the joint state publisher GUI
+```bash
+ros2 run joint_state_publisher_gui joint_state_publisher_gui
 ```
