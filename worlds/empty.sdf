@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <world name="default">
+    
+    <!-- 1. Physics Engine Settings -->
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <!-- 2. CRITICAL PLUGINS (Required for ROS 2 Communication) -->
+    <!-- Runs the actual simulation physics -->
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics" />
+    
+    <!-- Allows ROS to spawn/delete models via commands -->
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands" />
+    
+    <!-- Broadcasts visual data to GUI and ROS bridge -->
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster" />
+    
+    <!-- Manages contacts and collisions -->
+    <plugin filename="gz-sim-contact-system" name="gz::sim::systems::Contact" />
+
+    <!-- 3. Environment Lights and Ground -->
+    <!-- Standard Sun -->
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Sun</uri>
+    </include>
+
+    <!-- Standard Infinite Ground Plane -->
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Ground Plane</uri>
+    </include>
+
+  </world>
+</sdf>
