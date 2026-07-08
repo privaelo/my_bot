@@ -1,4 +1,4 @@
-# my_bot
+# adibot
 
 A small ROS 2 autonomous mobile robot project following the
 [Articulated Robotics - Build a Mobile Robot with ROS](https://articulatedrobotics.xyz/category/build-a-mobile-robot-with-ros/) tutorial series.
@@ -39,7 +39,7 @@ This package currently contains a basic differential-drive robot description:
 From the workspace root:
 
 ```bash
-colcon build --packages-select my_bot
+colcon build --packages-select adibot
 source install/setup.bash
 ```
 
@@ -48,13 +48,13 @@ source install/setup.bash
 Start the robot state publisher:
 
 ```bash
-ros2 launch my_bot rsp.launch.py
+ros2 launch adibot rsp.launch.py
 ```
 
 To use simulated time:
 
 ```bash
-ros2 launch my_bot rsp.launch.py use_sim_time:=true
+ros2 launch adibot rsp.launch.py use_sim_time:=true
 ```
 
 To visualize wheels, you need to simulate with the joint state publisher GUI
@@ -85,6 +85,6 @@ GUI don't include it; add
 to the other world plugins.
 
 **Scan publishes but RViz shows 0 points:** gz-sim stamps the scan with a scoped
-frame like `my_bot/laser_frame/laser` that isn't in the ROS TF tree, so RViz drops
+frame like `adibot/laser_frame/laser` that isn't in the ROS TF tree, so RViz drops
 every point. Set `<gz_frame_id>laser_frame</gz_frame_id>` in the sensor. Verify
 with `ros2 topic echo /scan --field header.frame_id --once`.

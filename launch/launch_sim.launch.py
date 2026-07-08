@@ -14,7 +14,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
-    package_name='my_bot' # should be the same as package name
+    package_name='adibot' # should be the same as package name
 
     rsp = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
@@ -40,7 +40,7 @@ def generate_launch_description():
     # Run the spawner node from the ros_gz_sim package. The entity name doesn't really matter if you only have a single robot.
     spawn_entity = Node(package='ros_gz_sim', executable='create',
                         arguments=['-topic', 'robot_description',
-                                   '-name', 'my_bot',
+                                   '-name', 'adibot',
                                    '-z', '0.1'],
                         output='screen')
     
