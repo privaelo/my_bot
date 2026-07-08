@@ -3,6 +3,17 @@
 A small ROS 2 autonomous mobile robot project following the
 [Articulated Robotics - Build a Mobile Robot with ROS](https://articulatedrobotics.xyz/category/build-a-mobile-robot-with-ros/) tutorial series.
 
+### Lidar visualization
+#### Gazebo
+<img width="1781" height="933" alt="Screenshot from 2026-07-08 13-28-12" src="https://github.com/user-attachments/assets/84729ea7-fa64-4098-bee7-ba4425f71106" />
+
+#### Rviz
+<img width="1649" height="943" alt="Lidar-scan-Rviz" src="https://github.com/user-attachments/assets/6bdc69db-2914-4ebe-9eed-83c4a39e29aa" />
+
+### Coming next:
+- Adding a camera
+- Object detection and tracking
+
 <!--## Current State
 
 This package currently contains a basic differential-drive robot description:
