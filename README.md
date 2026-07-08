@@ -5,7 +5,7 @@ A small ROS 2 autonomous mobile robot project following the
 
 ### Lidar visualization
 #### Gazebo
-<img width="1781" height="933" alt="Screenshot from 2026-07-08 13-28-12" src="https://github.com/user-attachments/assets/84729ea7-fa64-4098-bee7-ba4425f71106" />
+<img width="800" height="450" alt="Lidar_Gif" src="https://github.com/user-attachments/assets/62b1fc09-2b01-4429-9da6-3b672b1ee57f" />
 
 #### Rviz
 <img width="1649" height="943" alt="Lidar-scan-Rviz" src="https://github.com/user-attachments/assets/6bdc69db-2914-4ebe-9eed-83c4a39e29aa" />
