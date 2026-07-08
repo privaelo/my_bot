@@ -9,7 +9,10 @@ Panels:
         - /RobotModel1
         - /RobotModel1/Status1
         - /TF1
+        - /TF1/Status1
         - /TF1/Frames1
+        - /LaserScan1
+        - /LaserScan1/Status1
       Splitter Ratio: 0.5
     Tree Height: 638
   - Class: rviz_common/Selection
@@ -83,6 +86,11 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        laser_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         left_wheel:
           Alpha: 1
           Show Axes: false
@@ -114,7 +122,11 @@ Visualization Manager:
           Value: true
         chassis:
           Value: true
+        laser_frame:
+          Value: true
         left_wheel:
+          Value: true
+        odom:
           Value: true
         right_wheel:
           Value: true
@@ -124,15 +136,52 @@ Visualization Manager:
       Show Axes: true
       Show Names: false
       Tree:
-        base_link:
-          chassis:
-            caster_wheel:
+        odom:
+          base_link:
+            chassis:
+              caster_wheel:
+                {}
+              laser_frame:
+                {}
+            left_wheel:
               {}
-          left_wheel:
-            {}
-          right_wheel:
-            {}
+            right_wheel:
+              {}
       Update Interval: 0
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/LaserScan
+      Color: 255; 255; 255
+      Color Transformer: ""
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: LaserScan
+      Position Transformer: ""
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.07999999821186066
+      Style: Flat Squares
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /scan
+      Use Fixed Frame: true
+      Use rainbow: true
       Value: true
   Enabled: true
   Global Options:
@@ -180,7 +229,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 1.6611337661743164
+      Distance: 17.43349838256836
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -195,10 +244,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.025203000754117966
+      Pitch: 0.9752026796340942
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.6385600566864014
+      Yaw: 2.0103919506073
     Saved:
       - Class: rviz_default_plugins/Orbit
         Distance: 0.9425718784332275
@@ -236,5 +285,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1174
-  X: 746
-  Y: 101
+  X: 2138
+  Y: 53

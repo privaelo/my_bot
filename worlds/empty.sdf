@@ -21,6 +21,9 @@
     <!-- Manages contacts and collisions -->
     <plugin filename="gz-sim-contact-system" name="gz::sim::systems::Contact" />
 
+    <!-- Sensors Plugin-->
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors"/>
+
     <!-- 3. Environment Lights and Ground -->
     <!-- Standard Sun -->
     <include>

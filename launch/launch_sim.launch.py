@@ -43,6 +43,18 @@ def generate_launch_description():
                                    '-name', 'my_bot',
                                    '-z', '0.1'],
                         output='screen')
+    
+        # Launch the ROS-Gazebo bridge for normal topics
+    bridge_params = os.path.join(get_package_share_directory(package_name),'config','gz_bridge.yaml')
+    ros_gz_bridge = Node(
+        package="ros_gz_bridge",
+        executable="parameter_bridge",
+        arguments=[
+            '--ros-args',
+            '-p',
+            f'config_file:={bridge_params}',
+        ]
+    )
 
 
 
@@ -52,4 +64,5 @@ def generate_launch_description():
         world_arg,
         gazebo,
         spawn_entity,
+        ros_gz_bridge,
     ])
