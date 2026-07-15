@@ -36,7 +36,7 @@ This package currently contains a basic differential-drive robot description:
 
 ## Build
 
-From the workspace root:
+From the workspace root (`~/dev_ws`, not this folder):
 
 ```bash
 colcon build --packages-select adibot
