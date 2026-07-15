@@ -1,2 +1,12 @@
-/.vscode
-/media
+__pycache__/
+*.pyc
+# RL artifacts — big and regenerable
+tb/
+models/ckpt/
+# never commit these even if you accidentally run colcon inside src/
+build/
+install/
+log/
+.vscode/*
+!.vscode/settings.json
+!.vscode/c_cpp_properties.json
