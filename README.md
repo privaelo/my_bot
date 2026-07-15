@@ -45,6 +45,12 @@ source install/setup.bash
 
 ## Run
 
+Start the simulation on Gazebo:
+
+```bash
+ros2 launch adibot launch_sim.launch.py world:=path/to/your/world.sdf
+```
+
 Start the robot state publisher:
 
 ```bash
