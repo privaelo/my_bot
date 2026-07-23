@@ -10,3 +10,18 @@ target_driver:
     map_frame: map
     # map-frame circuit through the corner keep-out zones (obstacles.yaml)
     waypoints: [6.0, 6.0, -6.0, 6.0, -6.0, -6.0, 6.0, -6.0]
+
+map_loader:
+  ros__parameters:
+    frame_id: map
+
+global_planner:
+  ros__parameters:
+    replan_rate: 2.0         # Hz
+    inflation_radius: 0.4    # m, grown around every occupied cell
+    map_frame: map
+    robot_frame: base_link
+    # Phase 3 stand-in for target_predictor (Phase 4); opposite corner from
+    # the robot's default spawn in plan_to_goal.launch.py.
+    goal_x: 8.0
+    goal_y: 8.0
