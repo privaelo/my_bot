@@ -1,0 +1,12 @@
+target_driver:
+  ros__parameters:
+    speed: 0.5              # m/s along the circuit
+    control_rate: 20.0      # Hz
+    loop: true              # restart the circuit after the last waypoint
+    goal_tolerance: 0.3     # m, waypoint reached
+    k_heading: 1.5          # P gain on heading error
+    max_angular: 1.5        # rad/s
+    slow_angle: 0.8         # rad, turn in place above this heading error
+    map_frame: map
+    # map-frame circuit through the corner keep-out zones (obstacles.yaml)
+    waypoints: [6.0, 6.0, -6.0, 6.0, -6.0, -6.0, 6.0, -6.0]

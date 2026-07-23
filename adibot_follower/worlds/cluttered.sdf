@@ -124,8 +124,8 @@
         <visual name='visual'>
           <geometry><box><size>0.620 0.579 1.112</size></box></geometry>
           <material>
-            <ambient>0.20 0.70 0.65 1</ambient>
-            <diffuse>0.20 0.70 0.65 1</diffuse>
+            <ambient>0.30 0.70 0.30 1</ambient>
+            <diffuse>0.30 0.70 0.30 1</diffuse>
           </material>
         </visual>
       </link>
@@ -140,45 +140,13 @@
         <visual name='visual'>
           <geometry><box><size>0.738 0.424 1.314</size></box></geometry>
           <material>
-            <ambient>0.80 0.25 0.25 1</ambient>
-            <diffuse>0.80 0.25 0.25 1</diffuse>
+            <ambient>0.30 0.70 0.30 1</ambient>
+            <diffuse>0.30 0.70 0.30 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
     <model name='obstacle_06'>
-      <static>true</static>
-      <pose>-2.585 -5.575 0.624 0 0 0</pose>
-      <link name='link'>
-        <collision name='collision'>
-          <geometry><box><size>1.045 0.959 1.248</size></box></geometry>
-        </collision>
-        <visual name='visual'>
-          <geometry><box><size>1.045 0.959 1.248</size></box></geometry>
-          <material>
-            <ambient>0.60 0.35 0.75 1</ambient>
-            <diffuse>0.60 0.35 0.75 1</diffuse>
-          </material>
-        </visual>
-      </link>
-    </model>
-    <model name='obstacle_07'>
-      <static>true</static>
-      <pose>5.882 1.756 0.683 0 0 0</pose>
-      <link name='link'>
-        <collision name='collision'>
-          <geometry><box><size>0.474 0.477 1.366</size></box></geometry>
-        </collision>
-        <visual name='visual'>
-          <geometry><box><size>0.474 0.477 1.366</size></box></geometry>
-          <material>
-            <ambient>0.80 0.25 0.25 1</ambient>
-            <diffuse>0.80 0.25 0.25 1</diffuse>
-          </material>
-        </visual>
-      </link>
-    </model>
-    <model name='obstacle_08'>
       <static>true</static>
       <pose>8.007 -2.056 0.623 0 0 0</pose>
       <link name='link'>
@@ -188,29 +156,29 @@
         <visual name='visual'>
           <geometry><cylinder><radius>0.338</radius><length>1.246</length></cylinder></geometry>
           <material>
-            <ambient>0.30 0.70 0.30 1</ambient>
-            <diffuse>0.30 0.70 0.30 1</diffuse>
+            <ambient>0.80 0.25 0.25 1</ambient>
+            <diffuse>0.80 0.25 0.25 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
-    <model name='obstacle_09'>
+    <model name='obstacle_07'>
       <static>true</static>
-      <pose>1.838 -5.540 0.407 0 0 0</pose>
+      <pose>-2.137 -4.781 0.340 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
-          <geometry><cylinder><radius>0.377</radius><length>0.814</length></cylinder></geometry>
+          <geometry><box><size>0.909 0.692 0.681</size></box></geometry>
         </collision>
         <visual name='visual'>
-          <geometry><cylinder><radius>0.377</radius><length>0.814</length></cylinder></geometry>
+          <geometry><box><size>0.909 0.692 0.681</size></box></geometry>
           <material>
-            <ambient>0.25 0.45 0.85 1</ambient>
-            <diffuse>0.25 0.45 0.85 1</diffuse>
+            <ambient>0.85 0.78 0.20 1</ambient>
+            <diffuse>0.85 0.78 0.20 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
-    <model name='obstacle_10'>
+    <model name='obstacle_08'>
       <static>true</static>
       <pose>2.270 0.924 0.592 0 0 0</pose>
       <link name='link'>
@@ -220,13 +188,13 @@
         <visual name='visual'>
           <geometry><box><size>0.704 1.192 1.183</size></box></geometry>
           <material>
-            <ambient>0.60 0.35 0.75 1</ambient>
-            <diffuse>0.60 0.35 0.75 1</diffuse>
+            <ambient>0.30 0.70 0.30 1</ambient>
+            <diffuse>0.30 0.70 0.30 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
-    <model name='obstacle_11'>
+    <model name='obstacle_09'>
       <static>true</static>
       <pose>-4.540 -7.841 0.574 0 0 0</pose>
       <link name='link'>
@@ -236,29 +204,13 @@
         <visual name='visual'>
           <geometry><cylinder><radius>0.422</radius><length>1.148</length></cylinder></geometry>
           <material>
-            <ambient>0.90 0.55 0.15 1</ambient>
-            <diffuse>0.90 0.55 0.15 1</diffuse>
+            <ambient>0.85 0.78 0.20 1</ambient>
+            <diffuse>0.85 0.78 0.20 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
-    <model name='obstacle_12'>
-      <static>true</static>
-      <pose>6.140 -3.023 0.426 0 0 0</pose>
-      <link name='link'>
-        <collision name='collision'>
-          <geometry><box><size>0.569 1.154 0.852</size></box></geometry>
-        </collision>
-        <visual name='visual'>
-          <geometry><box><size>0.569 1.154 0.852</size></box></geometry>
-          <material>
-            <ambient>0.25 0.45 0.85 1</ambient>
-            <diffuse>0.25 0.45 0.85 1</diffuse>
-          </material>
-        </visual>
-      </link>
-    </model>
-    <model name='obstacle_13'>
+    <model name='obstacle_10'>
       <static>true</static>
       <pose>-7.806 -6.728 0.699 0 0 0</pose>
       <link name='link'>
@@ -268,13 +220,13 @@
         <visual name='visual'>
           <geometry><cylinder><radius>0.182</radius><length>1.398</length></cylinder></geometry>
           <material>
-            <ambient>0.25 0.45 0.85 1</ambient>
-            <diffuse>0.25 0.45 0.85 1</diffuse>
+            <ambient>0.85 0.35 0.60 1</ambient>
+            <diffuse>0.85 0.35 0.60 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
-    <model name='obstacle_14'>
+    <model name='obstacle_11'>
       <static>true</static>
       <pose>-7.422 -2.013 0.551 0 0 0</pose>
       <link name='link'>
@@ -290,7 +242,7 @@
         </visual>
       </link>
     </model>
-    <model name='obstacle_15'>
+    <model name='obstacle_12'>
       <static>true</static>
       <pose>5.996 -8.119 0.698 0 0 0</pose>
       <link name='link'>
@@ -300,13 +252,13 @@
         <visual name='visual'>
           <geometry><cylinder><radius>0.490</radius><length>1.397</length></cylinder></geometry>
           <material>
-            <ambient>0.20 0.70 0.65 1</ambient>
-            <diffuse>0.20 0.70 0.65 1</diffuse>
+            <ambient>0.30 0.70 0.30 1</ambient>
+            <diffuse>0.30 0.70 0.30 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
-    <model name='obstacle_16'>
+    <model name='obstacle_13'>
       <static>true</static>
       <pose>-3.946 2.386 0.588 0 0 0</pose>
       <link name='link'>
@@ -316,13 +268,29 @@
         <visual name='visual'>
           <geometry><cylinder><radius>0.338</radius><length>1.177</length></cylinder></geometry>
           <material>
+            <ambient>0.85 0.35 0.60 1</ambient>
+            <diffuse>0.85 0.35 0.60 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name='obstacle_14'>
+      <static>true</static>
+      <pose>1.476 -4.511 0.507 0 0 0</pose>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry><box><size>0.580 0.670 1.014</size></box></geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry><box><size>0.580 0.670 1.014</size></box></geometry>
+          <material>
             <ambient>0.20 0.70 0.65 1</ambient>
             <diffuse>0.20 0.70 0.65 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
-    <model name='obstacle_17'>
+    <model name='obstacle_15'>
       <static>true</static>
       <pose>2.834 7.916 0.472 0 0 0</pose>
       <link name='link'>
@@ -332,13 +300,13 @@
         <visual name='visual'>
           <geometry><box><size>0.774 0.983 0.945</size></box></geometry>
           <material>
-            <ambient>0.60 0.35 0.75 1</ambient>
-            <diffuse>0.60 0.35 0.75 1</diffuse>
+            <ambient>0.25 0.45 0.85 1</ambient>
+            <diffuse>0.25 0.45 0.85 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
-    <model name='obstacle_18'>
+    <model name='obstacle_16'>
       <static>true</static>
       <pose>8.620 5.801 0.645 0 0 0</pose>
       <link name='link'>
@@ -348,13 +316,13 @@
         <visual name='visual'>
           <geometry><cylinder><radius>0.168</radius><length>1.289</length></cylinder></geometry>
           <material>
-            <ambient>0.25 0.45 0.85 1</ambient>
-            <diffuse>0.25 0.45 0.85 1</diffuse>
+            <ambient>0.85 0.78 0.20 1</ambient>
+            <diffuse>0.85 0.78 0.20 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
-    <model name='obstacle_19'>
+    <model name='obstacle_17'>
       <static>true</static>
       <pose>8.137 -3.937 0.385 0 0 0</pose>
       <link name='link'>
@@ -364,13 +332,13 @@
         <visual name='visual'>
           <geometry><box><size>0.447 0.703 0.771</size></box></geometry>
           <material>
-            <ambient>0.60 0.35 0.75 1</ambient>
-            <diffuse>0.60 0.35 0.75 1</diffuse>
+            <ambient>0.90 0.55 0.15 1</ambient>
+            <diffuse>0.90 0.55 0.15 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
-    <model name='obstacle_20'>
+    <model name='obstacle_18'>
       <static>true</static>
       <pose>8.036 0.905 0.614 0 0 0</pose>
       <link name='link'>
@@ -380,29 +348,13 @@
         <visual name='visual'>
           <geometry><box><size>0.738 1.166 1.227</size></box></geometry>
           <material>
-            <ambient>0.20 0.70 0.65 1</ambient>
-            <diffuse>0.20 0.70 0.65 1</diffuse>
-          </material>
-        </visual>
-      </link>
-    </model>
-    <model name='obstacle_21'>
-      <static>true</static>
-      <pose>-3.284 -3.018 0.586 0 0 0</pose>
-      <link name='link'>
-        <collision name='collision'>
-          <geometry><box><size>0.717 0.937 1.173</size></box></geometry>
-        </collision>
-        <visual name='visual'>
-          <geometry><box><size>0.717 0.937 1.173</size></box></geometry>
-          <material>
             <ambient>0.85 0.78 0.20 1</ambient>
             <diffuse>0.85 0.78 0.20 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
-    <model name='obstacle_22'>
+    <model name='obstacle_19'>
       <static>true</static>
       <pose>8.025 -6.903 0.601 0 0 0</pose>
       <link name='link'>
@@ -412,29 +364,13 @@
         <visual name='visual'>
           <geometry><box><size>0.767 1.199 1.201</size></box></geometry>
           <material>
-            <ambient>0.30 0.70 0.30 1</ambient>
-            <diffuse>0.30 0.70 0.30 1</diffuse>
+            <ambient>0.20 0.70 0.65 1</ambient>
+            <diffuse>0.20 0.70 0.65 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
-    <model name='obstacle_23'>
-      <static>true</static>
-      <pose>-0.189 6.690 0.587 0 0 0</pose>
-      <link name='link'>
-        <collision name='collision'>
-          <geometry><box><size>0.907 0.611 1.174</size></box></geometry>
-        </collision>
-        <visual name='visual'>
-          <geometry><box><size>0.907 0.611 1.174</size></box></geometry>
-          <material>
-            <ambient>0.60 0.35 0.75 1</ambient>
-            <diffuse>0.60 0.35 0.75 1</diffuse>
-          </material>
-        </visual>
-      </link>
-    </model>
-    <model name='obstacle_24'>
+    <model name='obstacle_20'>
       <static>true</static>
       <pose>-8.258 4.510 0.638 0 0 0</pose>
       <link name='link'>
@@ -444,13 +380,13 @@
         <visual name='visual'>
           <geometry><box><size>0.739 0.621 1.277</size></box></geometry>
           <material>
-            <ambient>0.60 0.35 0.75 1</ambient>
-            <diffuse>0.60 0.35 0.75 1</diffuse>
+            <ambient>0.90 0.55 0.15 1</ambient>
+            <diffuse>0.90 0.55 0.15 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
-    <model name='obstacle_25'>
+    <model name='obstacle_21'>
       <static>true</static>
       <pose>-1.179 -7.992 0.555 0 0 0</pose>
       <link name='link'>
@@ -460,29 +396,13 @@
         <visual name='visual'>
           <geometry><box><size>0.993 0.841 1.110</size></box></geometry>
           <material>
-            <ambient>0.85 0.78 0.20 1</ambient>
-            <diffuse>0.85 0.78 0.20 1</diffuse>
+            <ambient>0.80 0.25 0.25 1</ambient>
+            <diffuse>0.80 0.25 0.25 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
-    <model name='obstacle_26'>
-      <static>true</static>
-      <pose>5.428 -0.681 0.649 0 0 0</pose>
-      <link name='link'>
-        <collision name='collision'>
-          <geometry><cylinder><radius>0.228</radius><length>1.298</length></cylinder></geometry>
-        </collision>
-        <visual name='visual'>
-          <geometry><cylinder><radius>0.228</radius><length>1.298</length></cylinder></geometry>
-          <material>
-            <ambient>0.20 0.70 0.65 1</ambient>
-            <diffuse>0.20 0.70 0.65 1</diffuse>
-          </material>
-        </visual>
-      </link>
-    </model>
-    <model name='obstacle_27'>
+    <model name='obstacle_22'>
       <static>true</static>
       <pose>-8.165 -5.260 0.422 0 0 0</pose>
       <link name='link'>
@@ -492,13 +412,13 @@
         <visual name='visual'>
           <geometry><cylinder><radius>0.230</radius><length>0.844</length></cylinder></geometry>
           <material>
-            <ambient>0.60 0.35 0.75 1</ambient>
-            <diffuse>0.60 0.35 0.75 1</diffuse>
+            <ambient>0.20 0.70 0.65 1</ambient>
+            <diffuse>0.20 0.70 0.65 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
-    <model name='obstacle_28'>
+    <model name='obstacle_23'>
       <static>true</static>
       <pose>-1.883 1.256 0.591 0 0 0</pose>
       <link name='link'>
@@ -508,8 +428,88 @@
         <visual name='visual'>
           <geometry><box><size>0.885 0.809 1.183</size></box></geometry>
           <material>
-            <ambient>0.80 0.25 0.25 1</ambient>
-            <diffuse>0.80 0.25 0.25 1</diffuse>
+            <ambient>0.60 0.35 0.75 1</ambient>
+            <diffuse>0.60 0.35 0.75 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name='obstacle_24'>
+      <static>true</static>
+      <pose>3.591 -3.263 0.566 0 0 0</pose>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry><box><size>0.651 1.078 1.131</size></box></geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry><box><size>0.651 1.078 1.131</size></box></geometry>
+          <material>
+            <ambient>0.60 0.35 0.75 1</ambient>
+            <diffuse>0.60 0.35 0.75 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name='obstacle_25'>
+      <static>true</static>
+      <pose>4.062 -0.422 0.632 0 0 0</pose>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry><cylinder><radius>0.464</radius><length>1.264</length></cylinder></geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry><cylinder><radius>0.464</radius><length>1.264</length></cylinder></geometry>
+          <material>
+            <ambient>0.30 0.70 0.30 1</ambient>
+            <diffuse>0.30 0.70 0.30 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name='obstacle_26'>
+      <static>true</static>
+      <pose>-1.982 4.131 0.452 0 0 0</pose>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry><box><size>0.661 1.009 0.903</size></box></geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry><box><size>0.661 1.009 0.903</size></box></geometry>
+          <material>
+            <ambient>0.90 0.55 0.15 1</ambient>
+            <diffuse>0.90 0.55 0.15 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name='obstacle_27'>
+      <static>true</static>
+      <pose>0.669 8.486 0.633 0 0 0</pose>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry><box><size>0.466 0.416 1.266</size></box></geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry><box><size>0.466 0.416 1.266</size></box></geometry>
+          <material>
+            <ambient>0.30 0.70 0.30 1</ambient>
+            <diffuse>0.30 0.70 0.30 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name='obstacle_28'>
+      <static>true</static>
+      <pose>2.542 4.259 0.440 0 0 0</pose>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry><cylinder><radius>0.423</radius><length>0.880</length></cylinder></geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry><cylinder><radius>0.423</radius><length>0.880</length></cylinder></geometry>
+          <material>
+            <ambient>0.90 0.55 0.15 1</ambient>
+            <diffuse>0.90 0.55 0.15 1</diffuse>
           </material>
         </visual>
       </link>

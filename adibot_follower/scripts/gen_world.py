@@ -161,11 +161,24 @@ def make_walls(world):
     return walls
 
 
+def point_segment_distance(px, py, ax, ay, bx, by):
+    """Distance from point (px, py) to segment (ax, ay)-(bx, by)."""
+    dx, dy = bx - ax, by - ay
+    seg_len_sq = dx * dx + dy * dy
+    if seg_len_sq == 0.0:
+        return math.hypot(px - ax, py - ay)
+    t = max(0.0, min(1.0, ((px - ax) * dx + (py - ay) * dy) / seg_len_sq))
+    return math.hypot(px - (ax + t * dx), py - (ay + t * dy))
+
+
 def place_obstacles(spec, rng):
     """Rejection-sample non-overlapping obstacles honoring keep-out zones."""
     world = spec['world']
     obs = spec['obstacles']
     keep_out = spec['keep_out']
+    corridor = spec.get('keep_out_corridor')
+    corridor_path = corridor['path'] if corridor else []
+    corridor_legs = list(zip(corridor_path, corridor_path[1:] + corridor_path[:1]))
     clearance = obs['min_clearance']
     inner = world['half_extent'] - world['wall_thickness']
 
@@ -197,6 +210,11 @@ def place_obstacles(spec, rng):
             math.hypot(proto.x - o.x, proto.y - o.y)
             > fr + o.footprint_radius + clearance
             for o in placed)
+        if corridor:
+            ok = ok and all(
+                point_segment_distance(proto.x, proto.y, a['x'], a['y'], b['x'], b['y'])
+                > corridor['radius'] + fr
+                for a, b in corridor_legs)
         if ok:
             placed.append(proto)
     return placed

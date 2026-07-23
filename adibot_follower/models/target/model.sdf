@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<sdf version="1.10">
+  <!--
+    Moving target the robot follows. Kinematic velocity control (no wheels):
+    gz.msgs.Twist on /model/target/cmd_vel, ground-truth odometry on
+    /model/target/odometry. Both are bridged by config/target_bridge.yaml.
+  -->
+  <model name="target">
+    <link name="base_link">
+      <inertial>
+        <mass>1.0</mass>
+        <inertia>
+          <ixx>0.019</ixx>
+          <iyy>0.019</iyy>
+          <izz>0.011</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>0.15</radius>
+            <length>0.4</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>0.15</radius>
+            <length>0.4</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.95 0.2 0.65 1</ambient>
+          <diffuse>0.95 0.2 0.65 1</diffuse>
+          <emissive>0.4 0.05 0.25 1</emissive>
+        </material>
+      </visual>
+    </link>
+    <plugin filename="gz-sim-velocity-control-system"
+            name="gz::sim::systems::VelocityControl"/>
+    <plugin filename="gz-sim-odometry-publisher-system"
+            name="gz::sim::systems::OdometryPublisher">
+      <odom_frame>target/odom</odom_frame>
+      <robot_base_frame>target/base_link</robot_base_frame>
+      <odom_publish_frequency>50</odom_publish_frequency>
+    </plugin>
+  </model>
+</sdf>

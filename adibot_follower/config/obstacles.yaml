@@ -48,3 +48,15 @@ keep_out:
   - {x: -6.0, y: 6.0, r: 1.5}
   - {x: -6.0, y: -6.0, r: 1.5}
   - {x: 6.0, y: -6.0, r: 1.5}
+
+# No obstacles within r of the straight legs connecting these points (in
+# order, cyclic) -- must match target_driver's waypoint circuit in
+# follower_params.yaml. The target drives point-to-point with no obstacle
+# avoidance, so its direct path has to stay physically clear.
+keep_out_corridor:
+  radius: 0.6
+  path:
+    - {x: 6.0, y: 6.0}
+    - {x: -6.0, y: 6.0}
+    - {x: -6.0, y: -6.0}
+    - {x: 6.0, y: -6.0}
