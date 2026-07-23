@@ -1,8 +1,5 @@
 __pycache__/
 *.pyc
-# RL artifacts — big and regenerable
-tb/
-models/ckpt/
 # never commit these even if you accidentally run colcon inside src/
 build/
 install/

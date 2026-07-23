@@ -1,7 +1,9 @@
 # adibot workspace
 
-ROS 2 packages for [adibot](adibot/), a small autonomous mobile robot,
-plus a trained RL policy for autonomous navigation.
+ROS 2 packages for [adibot](adibot/), a small differential-drive robot that
+follows a moving object through a cluttered world: constant-velocity target
+prediction, A* global planning on an occupancy grid, pure-pursuit tracking,
+and fixed-rate replanning.
 
 ### Lidar visualization
 <img width="800" height="450" alt="Lidar_Gif" src="https://github.com/user-attachments/assets/62b1fc09-2b01-4429-9da6-3b672b1ee57f" />
@@ -9,7 +11,6 @@ plus a trained RL policy for autonomous navigation.
 ## Packages
 
 - [`adibot/`](adibot/) - robot description, launch files, and Gazebo simulation. See its [README](adibot/README.md) for build/run instructions and troubleshooting notes.
-- [`adibot_rl/`](adibot_rl/) - RL navigation policy for adibot (training, evaluation, and a policy node).
 
 ## Setup
 
