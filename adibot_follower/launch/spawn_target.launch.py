@@ -4,6 +4,7 @@ from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
+from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration
 
 from launch_ros.actions import Node
@@ -15,6 +16,7 @@ def generate_launch_description():
     x = LaunchConfiguration('x')
     y = LaunchConfiguration('y')
     yaw = LaunchConfiguration('yaw')
+    bridge_clock = LaunchConfiguration('bridge_clock')
     args = [
         DeclareLaunchArgument('x', default_value='6.0',
                               description='Target spawn x (map frame)'),
@@ -22,6 +24,12 @@ def generate_launch_description():
                               description='Target spawn y (map frame)'),
         DeclareLaunchArgument('yaw', default_value='1.5708',
                               description='Target spawn yaw (map frame)'),
+        DeclareLaunchArgument(
+            'bridge_clock', default_value='true',
+            description='Bridge /clock -- disable when another bridge in the same '
+                        'launch (e.g. adibot gz_bridge.yaml) already provides it, '
+                        'since two independent clock bridges cause tf to intermittently '
+                        'jump back in time'),
     ]
 
     spawn = Node(
@@ -36,6 +44,12 @@ def generate_launch_description():
         arguments=['--ros-args', '-p',
                    f"config_file:={os.path.join(pkg, 'config', 'target_bridge.yaml')}"],
         parameters=[{'use_sim_time': True}])
+
+    clock_bridge = Node(
+        package='ros_gz_bridge', executable='parameter_bridge',
+        arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
+        condition=IfCondition(bridge_clock),
+        output='screen')
 
     # Gazebo's OdometryPublisher reports the target's pose in world
     # coordinates (verified empirically: first message equals the spawn pose),
@@ -53,4 +67,4 @@ def generate_launch_description():
         remappings=[('cmd_vel', '/target/cmd_vel'), ('odom', '/target/odom')],
         output='screen')
 
-    return LaunchDescription(args + [spawn, bridge, odom_anchor, driver])
+    return LaunchDescription(args + [spawn, bridge, clock_bridge, odom_anchor, driver])

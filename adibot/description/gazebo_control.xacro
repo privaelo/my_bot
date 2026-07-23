@@ -1,32 +1,51 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+    <!--
+      Kinematic "sliding" locomotion. The follower executes cmd_vel (v, omega)
+      exactly via VelocityControl instead of a diff-drive, so there is no wheel
+      slip, torque/velocity ceiling, or minimum-turning-radius from wheel
+      dynamics. The diff-drive controller understeered and slipped, clipping
+      obstacles even though the planned path was collision-free
+      (see adibot_follower/docs/known_issues.md). This mirrors the target model,
+      which is already kinematic. Sim-only simplification: on hardware a real
+      base controller would replace this.
+    -->
     <gazebo>
-        <plugin name="gz::sim::systems::DiffDrive" filename="gz-sim-diff-drive-system">
-
-            <!-- Wheel Information -->
-            <left_joint>left_wheel_joint</left_joint>
-            <right_joint>right_wheel_joint</right_joint>
-            <wheel_separation>0.35</wheel_separation>
-            <wheel_radius>0.05</wheel_radius>
-
-            <!-- Input -->
+        <plugin name="gz::sim::systems::VelocityControl"
+                filename="gz-sim-velocity-control-system">
             <topic>cmd_vel</topic>
-
-            <!-- Output -->
-            <frame_id>odom</frame_id>
-            <child_frame_id>base_link</child_frame_id>
-            <odom_topic>odom</odom_topic>            
-            <tf_topic>tf</tf_topic>
-
         </plugin>
 
+        <!-- Ground-truth odometry in the world frame (odom == map, so the
+             launch anchors map->odom with identity), published as /odom plus
+             the odom->base_link tf the planner and pure_pursuit look up. -->
+        <plugin name="gz::sim::systems::OdometryPublisher"
+                filename="gz-sim-odometry-publisher-system">
+            <odom_frame>odom</odom_frame>
+            <robot_base_frame>base_link</robot_base_frame>
+            <odom_topic>odom</odom_topic>
+            <tf_topic>tf</tf_topic>
+            <odom_publish_frequency>50</odom_publish_frequency>
+        </plugin>
 
-        <plugin name="gz::sim::systems::JointStatePublisher" filename="gz-sim-joint-state-publisher-system">
+        <plugin name="gz::sim::systems::JointStatePublisher"
+                filename="gz-sim-joint-state-publisher-system">
             <topic>joint_states</topic>
             <joint_name>left_wheel_joint</joint_name>
             <joint_name>right_wheel_joint</joint_name>
         </plugin>
+    </gazebo>
+
+    <!-- Frictionless wheels so nothing resists the commanded slide (the caster
+         is already frictionless in robot_core.xacro). -->
+    <gazebo reference="left_wheel">
+        <mu1>0.0</mu1>
+        <mu2>0.0</mu2>
+    </gazebo>
+    <gazebo reference="right_wheel">
+        <mu1>0.0</mu1>
+        <mu2>0.0</mu2>
     </gazebo>
 
 </robot>

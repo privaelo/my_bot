@@ -18,10 +18,30 @@ map_loader:
 global_planner:
   ros__parameters:
     replan_rate: 2.0         # Hz
-    inflation_radius: 0.4    # m, grown around every occupied cell
+    # Sized against the follower's ~0.30 m circumscribed footprint radius plus
+    # pure-pursuit corner-cutting. 0.4 m left only ~0.10 m body margin when the
+    # A* path hugged an obstacle and the robot clipped/wedged; 0.5 m still let it
+    # graze (~0.23 m worst-case body clearance). 0.6 m gives a ~0.30 m body floor.
+    # Requires obstacles.yaml min_clearance 1.4 m: 1.4 - 2*0.6 = 0.2 m free
+    # corridor between footprints (at min_clearance 1.0 m, 0.6 m sealed passages
+    # and stranded the robot). See docs/known_issues.md "Follower collides with
+    # obstacles / wedges".
+    inflation_radius: 0.6    # m, grown around every occupied cell
     map_frame: map
     robot_frame: base_link
-    # Phase 3 stand-in for target_predictor (Phase 4); opposite corner from
-    # the robot's default spawn in plan_to_goal.launch.py.
-    goal_x: 8.0
-    goal_y: 8.0
+    # goal comes from goal_pose (remapped to /target/predicted_pose in launch)
+
+target_predictor:
+  ros__parameters:
+    prediction_horizon: 1.0  # s, 0 disables prediction for ablation
+    map_frame: map
+
+pure_pursuit:
+  ros__parameters:
+    lookahead_distance: 0.3  # m, tighter path tracking (less corner-cut)
+    standoff_distance: 1.0   # m, trails the target instead of ramming it
+    max_linear: 0.8          # m/s
+    max_angular: 1.5         # rad/s
+    control_rate: 20.0       # Hz
+    map_frame: map
+    robot_frame: base_link

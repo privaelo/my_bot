@@ -31,7 +31,15 @@ add_executable(global_planner src/global_planner.cpp)
 ament_target_dependencies(global_planner
   rclcpp geometry_msgs nav_msgs std_msgs tf2 tf2_ros)
 
-install(TARGETS target_driver map_loader global_planner
+add_executable(target_predictor src/target_predictor.cpp)
+ament_target_dependencies(target_predictor
+  rclcpp geometry_msgs nav_msgs tf2 tf2_ros tf2_geometry_msgs)
+
+add_executable(pure_pursuit src/pure_pursuit.cpp)
+ament_target_dependencies(pure_pursuit
+  rclcpp geometry_msgs nav_msgs tf2 tf2_ros tf2_geometry_msgs)
+
+install(TARGETS target_driver map_loader global_planner target_predictor pure_pursuit
   DESTINATION lib/${PROJECT_NAME}
 )
 
@@ -49,6 +57,9 @@ if(BUILD_TESTING)
   find_package(ament_cmake_gtest REQUIRED)
   ament_add_gtest(test_a_star test/test_a_star.cpp)
   target_include_directories(test_a_star PRIVATE include)
+
+  ament_add_gtest(test_pure_pursuit test/test_pure_pursuit.cpp)
+  target_include_directories(test_pure_pursuit PRIVATE include)
 endif()
 
 ament_package()

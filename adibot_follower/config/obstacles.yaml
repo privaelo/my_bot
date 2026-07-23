@@ -26,7 +26,12 @@ obstacles:
   height_range: [0.6, 1.4]
   box_side_range: [0.4, 1.2]        # boxes stay axis-aligned (exact raster)
   cylinder_radius_range: [0.15, 0.5]
-  min_clearance: 1.0      # min gap between footprints and to the walls (m)
+  # min gap between footprints and to the walls (m). Sized so global_planner's
+  # inflation_radius (0.5) leaves a real free corridor between obstacles:
+  # 1.4 - 2*0.5 = 0.4 m wide, keeping the ~0.30 m-radius follower clear even
+  # with pure-pursuit corner-cutting. 1.0 m stranded the robot (see
+  # follower_params.yaml inflation_radius note).
+  min_clearance: 1.4
   # visual only; drawn from the seeded rng after placement, so editing the
   # palette recolors obstacles without moving them
   palette:

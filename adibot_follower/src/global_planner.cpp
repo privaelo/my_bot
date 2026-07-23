@@ -1,9 +1,8 @@
 // Copyright 2026 privaelo
 //
 // Replans an A* path at a fixed rate from the robot's tf pose (map ->
-// robot_frame) to a goal. Phase 3: goal is a static (goal_x, goal_y)
-// parameter. Phase 4 will replace goal_ with a /target/predicted_pose
-// subscription -- everything downstream of goal_ is unchanged by that swap.
+// robot_frame) to the latest goal received on goal_pose (remapped to
+// /target/predicted_pose in launch).
 
 #include <tf2_ros/buffer.h>
 #include <tf2_ros/transform_listener.h>
@@ -58,21 +57,20 @@ public:
   {
     const double replan_rate = declare_parameter("replan_rate", 2.0);
     inflation_radius_ = declare_parameter("inflation_radius", 0.4);
-    goal_x_ = declare_parameter("goal_x", 8.0);
-    goal_y_ = declare_parameter("goal_y", 8.0);
     map_frame_ = declare_parameter("map_frame", "map");
     robot_frame_ = declare_parameter("robot_frame", "base_link");
 
     RCLCPP_INFO(
       get_logger(),
-      "replan_rate %.1f Hz, inflation_radius %.2f m, goal (%.1f, %.1f), map_frame '%s', "
-      "robot_frame '%s'",
-      replan_rate, inflation_radius_, goal_x_, goal_y_, map_frame_.c_str(),
-      robot_frame_.c_str());
+      "replan_rate %.1f Hz, inflation_radius %.2f m, map_frame '%s', robot_frame '%s'",
+      replan_rate, inflation_radius_, map_frame_.c_str(), robot_frame_.c_str());
 
     const auto qos = rclcpp::QoS(rclcpp::KeepLast(1)).reliable().transient_local();
     map_sub_ = create_subscription<nav_msgs::msg::OccupancyGrid>(
       "map", qos, [this](nav_msgs::msg::OccupancyGrid::SharedPtr msg) {map_ = std::move(msg);});
+    goal_sub_ = create_subscription<geometry_msgs::msg::PoseStamped>(
+      "goal_pose", 10,
+      [this](geometry_msgs::msg::PoseStamped::SharedPtr msg) {goal_ = std::move(msg);});
     path_pub_ = create_publisher<nav_msgs::msg::Path>("plan", 10);
 
     timer_ = rclcpp::create_timer(
@@ -84,6 +82,10 @@ private:
   {
     if (!map_) {
       RCLCPP_WARN_THROTTLE(get_logger(), *get_clock(), 5000, "waiting for map");
+      return;
+    }
+    if (!goal_) {
+      RCLCPP_WARN_THROTTLE(get_logger(), *get_clock(), 5000, "waiting for goal");
       return;
     }
 
@@ -110,9 +112,28 @@ private:
       std::max(0, static_cast<int>(std::round(inflation_radius_ / map_->info.resolution)));
     const adibot_follower::Grid inflated = adibot_follower::inflate(grid, inflation_cells);
 
-    const auto start = world_to_cell(
+    const auto raw_start = world_to_cell(
       robot_tf.transform.translation.x, robot_tf.transform.translation.y, map_->info);
-    const auto raw_goal = world_to_cell(goal_x_, goal_y_, map_->info);
+    const auto raw_goal = world_to_cell(
+      goal_->pose.position.x, goal_->pose.position.y, map_->info);
+
+    if (!inflated.in_bounds(raw_start.col, raw_start.row)) {
+      RCLCPP_WARN_THROTTLE(get_logger(), *get_clock(), 5000, "robot is outside the map bounds");
+      return;
+    }
+    // Snap the start the same way as the goal: the robot's true position can
+    // end up inside the inflated margin (grazing an obstacle, localization
+    // noise), and without this it can never plan an escape route -- A*
+    // rejects an occupied start outright, so it would be stuck permanently
+    // once it happens once. Verified empirically: the robot drove within
+    // 0.62 m of a 0.42 m-radius obstacle and got permanently wedged, because
+    // that put its own cell inside the inflated zone with no snap to fall
+    // back on.
+    const auto start = adibot_follower::find_nearest_free(inflated, raw_start);
+    if (!start) {
+      RCLCPP_WARN_THROTTLE(get_logger(), *get_clock(), 5000, "no free cell near the robot");
+      return;
+    }
 
     if (!inflated.in_bounds(raw_goal.col, raw_goal.row)) {
       RCLCPP_WARN_THROTTLE(get_logger(), *get_clock(), 5000, "goal is outside the map bounds");
@@ -124,7 +145,7 @@ private:
       return;
     }
 
-    const auto cells = adibot_follower::a_star(inflated, start, *goal);
+    const auto cells = adibot_follower::a_star(inflated, *start, *goal);
     if (cells.empty()) {
       RCLCPP_WARN_THROTTLE(get_logger(), *get_clock(), 5000, "no path found, keeping last plan");
       return;
@@ -140,12 +161,14 @@ private:
     path_pub_->publish(path);
   }
 
-  double inflation_radius_{}, goal_x_{}, goal_y_{};
+  double inflation_radius_{};
   std::string map_frame_, robot_frame_;
   nav_msgs::msg::OccupancyGrid::SharedPtr map_;
+  geometry_msgs::msg::PoseStamped::SharedPtr goal_;
   tf2_ros::Buffer tf_buffer_;
   tf2_ros::TransformListener tf_listener_;
   rclcpp::Subscription<nav_msgs::msg::OccupancyGrid>::SharedPtr map_sub_;
+  rclcpp::Subscription<geometry_msgs::msg::PoseStamped>::SharedPtr goal_sub_;
   rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr path_pub_;
   rclcpp::TimerBase::SharedPtr timer_;
 };
