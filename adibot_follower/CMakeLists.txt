@@ -44,7 +44,7 @@ install(TARGETS target_driver map_loader global_planner target_predictor pure_pu
 )
 
 install(
-  DIRECTORY config launch models worlds
+  DIRECTORY config launch models rviz worlds
   DESTINATION share/${PROJECT_NAME}
 )
 

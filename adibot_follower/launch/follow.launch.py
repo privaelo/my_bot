@@ -6,7 +6,7 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.conditions import IfCondition, UnlessCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, PythonExpression
 
 from launch_ros.actions import Node
 
@@ -22,6 +22,7 @@ def generate_launch_description():
     robot_yaw = LaunchConfiguration('robot_yaw')
     headless = LaunchConfiguration('headless')
     rviz = LaunchConfiguration('rviz')
+    paused = LaunchConfiguration('paused')
     args = [
         DeclareLaunchArgument(
             'world', default_value=os.path.join(follower_pkg, 'worlds', 'cluttered.sdf'),
@@ -34,15 +35,21 @@ def generate_launch_description():
                               description='Robot spawn yaw (map frame)'),
         DeclareLaunchArgument('headless', default_value='false',
                               description='Run gz sim server-only, no GUI'),
-        # Defaults to false until rviz/follower.rviz exists; flips once it does.
-        DeclareLaunchArgument('rviz', default_value='false',
+        DeclareLaunchArgument('rviz', default_value='true',
                               description='Launch RViz with the saved follower config'),
+        DeclareLaunchArgument('paused', default_value='false',
+                              description='Start Gazebo paused (GUI only); press play '
+                                          'to begin. Handy for recording a demo from t=0'),
     ]
+
+    # gz sim starts paused unless '-r' is passed, so drop it when paused:=true.
+    run_flag = PythonExpression(["'' if '", paused, "' == 'true' else '-r '"])
 
     gazebo_gui = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py')]),
-        launch_arguments={'gz_args': ['-r -v4 ', world], 'on_exit_shutdown': 'true'}.items(),
+        launch_arguments={'gz_args': [run_flag, '-v4 ', world],
+                          'on_exit_shutdown': 'true'}.items(),
         condition=UnlessCondition(headless))
 
     gazebo_headless = IncludeLaunchDescription(
@@ -109,11 +116,13 @@ def generate_launch_description():
         parameters=[params_file, {'use_sim_time': True}],
         output='screen')
 
+    # RViz only when requested AND not headless (headless => no GUI at all).
     rviz_node = Node(
         package='rviz2', executable='rviz2',
         arguments=['-d', os.path.join(follower_pkg, 'rviz', 'follower.rviz')],
         parameters=[{'use_sim_time': True}],
-        condition=IfCondition(rviz),
+        condition=IfCondition(PythonExpression(
+            ["'", rviz, "' == 'true' and '", headless, "' == 'false'"])),
         output='screen')
 
     return LaunchDescription(
