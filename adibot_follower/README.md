@@ -3,7 +3,7 @@
 A differential-drive robot follows a moving target through a cluttered world.
 Pipeline: **constant-velocity target prediction → A\* on a static occupancy grid
 → pure-pursuit tracking**, replanning at a fixed rate. Target pose comes from
-Gazebo ground truth (bridged), so perception can be swapped in later behind the
+Gazebo ground truth, so perception can be swapped in later behind the
 same topic.
 
 ## Pipeline
@@ -49,13 +49,11 @@ Launch args: `headless:=true` (gz server only, no GUI/RViz), `rviz:=false`,
 `paused:=true` (start Gazebo paused — press play to begin, handy for recording a
 demo from t=0), `robot_x`/`robot_y`/`robot_yaw` (follower spawn), `world:=<path>`.
 
-Record a demo from the first frame:
-
 ```bash
 ros2 launch adibot_follower follow.launch.py paused:=true
-# set up your recording / camera, then press the play button in Gazebo
 ```
 
+<!--
 > **GUI note (VS Code integrated terminal).** `gz sim` and `rviz2` may crash with
 > a `libpthread` symbol-lookup error because `GTK_PATH` is inherited from the
 > VS Code snap. Run `unset GTK_PATH GTK_MODULES` before launching any GUI app
@@ -79,18 +77,16 @@ Spec, seed, and generated files are all committed. Regenerate with:
 ```bash
 python3 scripts/gen_world.py
 ```
-
+-->
 ## Sim-only assumptions
 
 - **Ground-truth odometry** ⇒ `map ≡ odom` and `map ≡ target/odom` (identity
   static transforms in launch). On hardware a localizer would own `map → odom`.
 - **Kinematic locomotion.** The follower executes `cmd_vel` via `VelocityControl`
-  (a "sliding box"), not wheeled diff-drive dynamics — see
-  [docs/known_issues.md](docs/known_issues.md) for why. A real base controller
-  replaces this on hardware.
+  (a "sliding box"), not wheeled diff-drive dynamics. 
 
-## Known issues 
+<!--## Known issues 
 
 See [docs/known_issues.md](docs/known_issues.md) for the debugging trail and the
 reasoning behind the inflation / clearance / locomotion choices (obstacle
-collisions, tf clock races, the GUI `GTK_PATH` crash, RViz "No map received").
+collisions, tf clock races, the GUI `GTK_PATH` crash, RViz "No map received"). -->
